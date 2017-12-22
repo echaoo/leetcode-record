@@ -10,7 +10,7 @@ function removeDuplicates(arr) {
     }
     return arr
 }
-let arr = [1, 1, 1]
 
+let arr = [1, 1, 1]
 console.log(removeDuplicates(arr))
 console.log(arr)
