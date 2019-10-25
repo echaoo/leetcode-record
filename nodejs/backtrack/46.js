@@ -1,35 +1,31 @@
 /**
- * @param {number} n
- * @param {number} k
+ * @param {number[]} nums
  * @return {number[][]}
- * 回溯法
  */
-var combine = function(n, k) {
+var permute = function(nums) {
   const result = []
-  for (let i = 1; i < n + 1; i++) {
-    if (k === 1) {
-      result.push([i])
-    } else {
-      backTrack(n, k, i,[i], result)
-    }
+  for (let i = 0; i < nums.length; i++) {
+    backTrack(nums, i,[nums[i]], result)
   }
   return result
 };
 
-function backTrack (n, k, index, tempPath, result) {
-  if (index > n) {
+function backTrack (nums, index, tempPath, result) {
+  if (index > nums.length) {
     return
   }
-  if (tempPath.length > k) {
-    return
-  } else if (tempPath.length === k) {
+  if (tempPath.length === nums.length) {
     result.push(tempPath)
+    return
   }
-  for (let i = index + 1; i < n + 1; i++) {
-    const newPath = [...tempPath, i]
-    backTrack(n, k, i, newPath, result)
+  for (let i = 0; i < nums.length; i++) {
+    const newValue =  (tempPath.indexOf(nums[i]) > -1) ? null : nums[i]
+    if(newValue !== null) {
+      const newPath = [...tempPath, newValue]
+      backTrack(nums, i, newPath, result)
+    }
   }
 }
 
-const a = combine(4, 2)
+const a = permute([0, 1])
 console.log(a)
